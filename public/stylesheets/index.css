@@ -1,0 +1,266 @@
+body {
+    background-image:url(../images/wallpaper.png);
+}
+
+#main {
+    position:relative;
+    min-height:500px;
+}
+#main .icon-loading {
+    position:absolute;
+    left:300px;
+    top:200px;
+}
+/**
+ * navbar
+ */
+.navbar {
+    height:85px;
+}
+.navbar .navbar-inner {
+    background:#08C;
+    color:#FFF;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    -ms-border-radius:0;
+    -o-border-radius:0;
+    border-radius:0;
+    padding:10px 0 10px;
+}
+.navbar .container {
+    width:940px;
+}
+.navbar .brand {
+    color:#F2F2F2;
+    font-size:24px;
+    font-family:"Lucida Grande", "Segoe UI", "Bitstream Vera Sans", Tahoma, Verdana, Arial,sans-serif;
+    font-weight:bolder;
+    line-height:180%;
+}
+
+/**
+ * article
+ */
+.article {
+    border:1px solid #DDD;
+    background-color:#FFF;
+    margin-bottom:20px;
+    padding:20px;
+    border-radius:3px;
+    overflow:hidden;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    -webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.10);
+    -moz-box-shadow:0px 1px 1px rgba(0,0,0,0.10);
+    box-shadow:0px 1px 1px 
+}
+.article .article-title {
+    margin-left:70px;
+}
+.article .article-date {
+    width:50px;
+    height:50px;
+}
+.article .article-date .article-month {
+    font-size:11px;
+    text-transform:uppercase;
+    color:white;
+    text-align:center;
+    display:block;
+    padding:2px;
+    background:#08C;
+    border-bottom:1px dotted #08C;
+}
+.article .article-date .article-day {
+    font-size:11px;
+    text-transform:uppercase;
+    color:#3D3D3D;
+    text-align:center;
+    display:block;
+    background:white;
+    border-bottom:1px dotted #2B4260;
+    border-right:1px dotted #2B4260;
+    border-left:1px dotted #2B4260;
+    padding:2px;
+    line-height:11px;
+}
+.article .article-footer {
+} 
+.article .article-footer .article-footer-commentCount {
+    padding:0 0 0 5px;
+    font-size:14px;    
+    color:#909090;
+}
+.article .article-footer .article-more {
+    font-size:16px;
+    font-weight:bolder;
+}
+.article .article-comment {
+    border-top:1px dashed #AAA;
+    padding:10px 0;
+}
+.article .article-comment-error {
+    display:none;    
+}
+.article .article-comment-error .alert-text{
+    margin:0;
+}
+.article .article-comment-error.comment-alert-active {
+    display:block;
+}
+.article .article-comment .article-comment-list {
+    list-style-type:none;
+    margin-left:0px;
+}
+.article .article-comment .article-comment-item {
+    background:#FAFAFA;
+    background:rgba(0, 0, 0, 0.02); 
+    border-bottom:1px solid #E6E6E6;
+    border-bottom:1px solid rgba(0, 0, 0, 0.07);
+    padding:10px 10px 5px;
+}
+.article .article-comment .article-comment-item .comment-item-head {
+    margin-bottom:10px;
+    color:#777;
+    line-height:16px;
+}
+.article .article-comment .article-comment-item .comment-item-name {
+    font-weight:600;
+    font-size:15px;
+}
+.article .article-comment .article-comment-item .comment-item-bullet {
+    padding:0 3px;
+    font-size:75%;
+    color:#CCC;
+    line-height:1.4;
+}
+.article .article-comment .article-comment-item .comment-item-time {
+    font-weight:400;
+    font-size:14px;
+    color:inherit;
+}
+.article .article-comment .article-comment-textarea {
+    display:block;
+    margin-bottom:10px;
+    width:644px;
+    height:25px;
+    -webkit-transition:height .2s;
+    -moz-transition:height .2s;
+    transition:height .2s;
+}
+.article .article-comment-editor.extend .article-comment-textarea {
+    height:50px;
+}
+.article .article-comment .article-comment-reply {
+    padding:4px 20px;
+}
+.article .article-comment .icon-user,
+.article .article-comment .icon-home {
+    margin-left:5px;
+}
+
+.side {
+    margin-bottom:20px;
+}
+
+.side .side-title {
+    margin-top:0px;
+    padding:10px 0;
+    border-bottom:1px dashed #AAA;
+}
+.side.recent,
+.side.author {
+    display:none;
+} 
+.side.author.active, 
+.side.recent.active {
+    display:block;
+}
+.side.recent .recent-list {
+    border:1px solid #222;
+    overflow:hidden;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    font-size:12px;
+}
+.side.recent .recent-item {
+    background-color:#333;
+    background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(0, 0, 0, 0.00)), color-stop(1, rgba(0, 0, 0, 0.10)));
+    background-image:-webkit-linear-gradient(top, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.10) 100%);
+    background-image:-moz-linear-gradient(top, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.10) 100%);
+    background-image:-o-linear-gradient(top, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.10) 100%);
+    background-image:-ms-linear-gradient(top, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.10) 100%);
+    background-image:linear-gradient(top, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.10) 100%);
+    border-top:1px dashed #444;
+    -webkit-box-shadow:inset 0px -1px 0px #262626;
+    -moz-box-shadow:inset 0px -1px 0px #262626;
+    box-shadow:inset 0px -1px 0px #262626;
+    padding:8px;
+    color:#666;
+    text-shadow:0px -1px 0px black;
+}
+.side.recent .recent-item.recent-first {
+    border-top:none;
+}
+.side.recent .recent-item .recent-title {
+    color: #EEE;
+    display: block;
+}
+.side.author .author-head {
+    width:50px;
+}
+.side.author .author-self {
+    width:160px;
+    margin-bottom:0px;
+}
+/**
+ * footer的css样式.
+ */
+.footer {
+    text-align:center;
+    padding:10px 0;
+    margin-top:20px;
+    border-top:1px dashed #CCC;
+}
+.footer p {
+    text-shadow: 0px 1px 0px white;
+    font-size: 12px;
+    margin-bottom:0;
+}
+
+/*
+ * google-code-prettify
+ */
+
+.com { color:#93a1a1; }
+.lit { color:#195f91; }
+.pun, .opn, .clo { color:#93a1a1; }
+.fun { color:#dc322f; }
+.str, .atv { color:#D14; }
+.kwd, .prettyprint .tag { color:#1e347b; }
+.typ, .atn, .dec, .var { color:teal; }
+.pln { color:#48484c; }
+
+.prettyprint {
+    padding:8px;
+    background-color:#f7f7f9;
+    border:1px solid #e1e1e8;
+}
+.prettyprint.linenums {
+    -webkit-box-shadow:inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+    -moz-box-shadow:inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+    box-shadow:inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+    margin:0 0 0 33px; /* IE indents via margin-left */
+}
+ol.linenums li {
+    padding-left:12px;
+    color:#bebec5;
+    line-height:20px;
+    text-shadow:0 1px 0 #fff;
+}

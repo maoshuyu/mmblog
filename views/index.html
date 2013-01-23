@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include head.html %>
+  </head>
+  <body>
+    <% include navbar.html %>
+    <div class="container">
+      <!-- 内容 -->
+      <div id="content" class="row">
+        <!-- 正文 -->
+        <div id="main" class="span9">
+        </div>
+        <!-- 侧栏 -->
+        <div id="sidebar" class="span3">
+          <% include author.html %>
+          <% include rss.html %>
+          <div id="recent" class="side recent">
+          </div>
+        </div>
+      </div>
+    </div>
+    <% include footer.html %>
+  </body>
+</html>
