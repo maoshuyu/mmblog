@@ -1,7 +1,8 @@
 {
   "name": "mmblog",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
+  "repository: "https://github.com/maoshuyu/mmblog.git",
   "scripts": {
     "start": "node app"
   },
