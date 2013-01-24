@@ -16,36 +16,34 @@ var app = express()
   , accessLogfile = fs.createWriteStream('access.log', {'flags': 'a'})
   , errorLogfile = fs.createWriteStream('error.log', {'flags': 'a'});
 
-app.configure(function() {
-    app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000);
 
-    //设置模板引擎为ejs
-    app.set('views', __dirname + '/views');
-    app.set('view engine', 'html');
-    app.engine('html', ejs.renderFile);
+//设置模板引擎为ejs
+app.set('views', __dirname + '/views');
+app.set('view engine', 'html');
+app.engine('html', ejs.renderFile);
 
-    app.use(express.favicon());
-    //访问日志
-    app.use(express.logger('dev'));
-    app.use(express.logger({'stream': accessLogfile}));
+app.use(express.favicon());
+//访问日志
+app.use(express.logger('dev'));
+app.use(express.logger({'stream': accessLogfile}));
 
-    app.use(express.bodyParser());
-    app.use(express.methodOverride());
-    app.use(app.router);
-    app.use(express.static(path.join(__dirname, 'public')));
-});
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.configure('development', function() {
+if ('development' == app.get('env')) {
     app.use(express.errorHandler());
-});
-app.configure('production', function() {
+}
+if ('production' == app.get('env')) {
     //错误日志
     app.use(function(err, req, res, next) {
         var meta = '[' + new Date() + '] ' + req.url + '\n';        
         errorLogfile.write(meta + err.stack + '\n');
         next();
     });
-});
+}
 
 app.get('/', routes.index);
 app.get('/article/recent', article.recent);
