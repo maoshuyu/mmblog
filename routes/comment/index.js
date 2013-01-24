@@ -7,15 +7,15 @@ function addComment(newComment, cb) {
     var comment = new Comment(newComment);
     comment.save(function(err, comment) {
 	    if (err) {
-		    return cb(err);	
+            return cb(err);	
 	    }
 	    //更新article的commentCount
 	    articleCtrl.getArticleById(comment.articleId, function(err, article) {
-		    if (err) {
-			    cb(err);	
-		    }
-		    article.commentCount += 1;
-		    article.save();
+            if (err) {
+                cb(err);	
+            }
+            article.commentCount += 1;
+            article.save();
 	    });
 	    cb(null, comment);
     });
@@ -23,9 +23,9 @@ function addComment(newComment, cb) {
 
 function getCommentsByArticleId(id, cb) {
     Comment.find({'articleId': id}, [], {sort: {'createTime': 'asc'}}, function(err, list) {
-	    if (err) {
-		    cb(err);
-	    }
+        if (err) {
+            cb(err);
+        }
 	    cb(null, list);
     });
 }
@@ -37,14 +37,14 @@ exports.save = function(req, res) {
     home = req.body.home,
     articleId = req.body.articleId;
     addComment({
-	    'articleId': articleId,	
-	    'content': content,
-	    'name': name,
-	    'email': email,
-	    'home': home
+        'articleId': articleId,	
+        'content': content,
+        'name': name,
+        'email': email,
+        'home': home
     }, function(err, comment) {
 	    if (err) {
-		    return next(err);	
+            return next(err);	
 	    }
 	    res.json(comment);
     });
@@ -52,9 +52,9 @@ exports.save = function(req, res) {
 exports.list = function(req, res) {
     var id = req.params.articleId;
     getCommentsByArticleId(id, function(err, list) {
-	    if (err) {
-		    return next(err);	
-	    }
-	    res.json(list);
+        if (err) {
+            return next(err);	
+        }
+        res.json(list);
     });
 }
