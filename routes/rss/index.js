@@ -5,7 +5,7 @@ var data2xml = require('data2xml')()
   , rssConfig = require('../../config').config.rss;
 
 
-exports.index = function(req, res) {
+exports.index = function(req, res, next) {
     var opt = { 
             'limit': rssConfig.maxRssItem, 
             'sort': {'createTime': 'desc'}

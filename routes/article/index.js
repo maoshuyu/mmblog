@@ -47,7 +47,7 @@ function getNeighborArticle(id, cb) {
 /*
  * 获取blog列表
  */
-exports.list = function(req, res) {
+exports.list = function(req, res, next) {
     getArticleByQuery({}, [], {sort: {'createTime': -1}}, function(err, articles) {
         if (err) {
             return next(err);   
@@ -69,7 +69,7 @@ exports.list = function(req, res) {
 /*
  * 获取最近blog列表
  */
-exports.recent = function(req, res) {
+exports.recent = function(req, res, next) {
     getArticleByQuery({}, ['title', '_id', 'createTime', 'updateTime'], {limit: 10, sort: {'createTime': -1}}, function(err, articles) {
         if (err) {
             return next(err);   
@@ -81,7 +81,7 @@ exports.recent = function(req, res) {
 /*
  * 获取blog
  */
-exports.one = function(req, res) {
+exports.one = function(req, res, next) {
     var id = req.params.id 
       , ep = new EventProxy();
 

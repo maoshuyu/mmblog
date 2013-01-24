@@ -30,7 +30,7 @@ function getCommentsByArticleId(id, cb) {
     });
 }
 
-exports.save = function(req, res) {
+exports.save = function(req, res, next) {
     var content = req.body.content,
     name = req.body.name,
     email = req.body.email,
@@ -49,7 +49,7 @@ exports.save = function(req, res) {
         res.json(comment);
     });
 };
-exports.list = function(req, res) {
+exports.list = function(req, res, next) {
     var id = req.params.articleId;
     getCommentsByArticleId(id, function(err, list) {
         if (err) {
