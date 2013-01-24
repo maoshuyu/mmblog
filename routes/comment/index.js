@@ -6,18 +6,18 @@ var models = require('../../models')
 function addComment(newComment, cb) {
     var comment = new Comment(newComment);
     comment.save(function(err, comment) {
-	    if (err) {
+        if (err) {
             return cb(err);	
-	    }
-	    //更新article的commentCount
-	    articleCtrl.getArticleById(comment.articleId, function(err, article) {
+        }
+        //更新article的commentCount
+        articleCtrl.getArticleById(comment.articleId, function(err, article) {
             if (err) {
                 cb(err);	
             }
             article.commentCount += 1;
             article.save();
-	    });
-	    cb(null, comment);
+        });
+        cb(null, comment);
     });
 }
 
@@ -26,7 +26,7 @@ function getCommentsByArticleId(id, cb) {
         if (err) {
             cb(err);
         }
-	    cb(null, list);
+        cb(null, list);
     });
 }
 
@@ -43,10 +43,10 @@ exports.save = function(req, res) {
         'email': email,
         'home': home
     }, function(err, comment) {
-	    if (err) {
+        if (err) {
             return next(err);	
-	    }
-	    res.json(comment);
+        }
+        res.json(comment);
     });
 };
 exports.list = function(req, res) {
