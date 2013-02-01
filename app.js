@@ -28,6 +28,8 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.logger({'stream': accessLogfile}));
 
+//启用gzip
+app.use(express.compress());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
@@ -53,6 +55,6 @@ app.get('/comment/:articleId', comment.list);
 app.post('/comment/', comment.save);
 app.get('/rss', rss.index);
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function() {
     console.log("Server listening on port " + app.get('port'));
 });
