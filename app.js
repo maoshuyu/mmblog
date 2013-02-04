@@ -23,7 +23,9 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
-app.use(express.favicon());
+// 设定favicon.ico的过期时间为356d
+app.use(express.favicon('./public/favicon.ico', {maxAge: 31536000000}));
+
 //访问日志
 app.use(express.logger('dev'));
 app.use(express.logger({'stream': accessLogfile}));
@@ -33,7 +35,8 @@ app.use(express.compress());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+
+//app.use(express.static(path.join(__dirname, 'public')));
 
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
