@@ -105,6 +105,7 @@
                              </form>\
                            </div>';
     var CommentItemTemplate = '<li class="article-comment-item">\
+                                 <div class="article-comment-avatar"><img width="40" height="40" src="<%= avatar %>"/></div>\
                                  <div class="comment-item-head">\
                                     <% if (home) { %>\
                                     <a class="comment-item-name" title="<%= name %>" href="<%= home %>" target="_black"><%= name %></a>\

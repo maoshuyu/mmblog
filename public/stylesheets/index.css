@@ -120,11 +120,23 @@ body {
     margin-left:0px;
 }
 .article .article-comment .article-comment-item {
+    position:relative;
     background:#FAFAFA;
     background:rgba(0, 0, 0, 0.02); 
     border-bottom:1px solid #E6E6E6;
     border-bottom:1px solid rgba(0, 0, 0, 0.07);
-    padding:10px 10px 5px;
+    padding:10px 10px 5px 60px;
+}
+.article .article-comment .article-comment-avatar {
+    position:absolute;
+    top:10px;
+    left:10px;
+}
+.article .article-comment .article-comment-avatar img {
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
+    display:block;
 }
 .article .article-comment .article-comment-item .comment-item-head {
     margin-bottom:10px;

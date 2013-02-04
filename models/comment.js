@@ -8,7 +8,8 @@ var CommentSchema = new Schema({
     'createTime': { type: Date, default: Date.now },
     'name': { type: String },
     'email': { type: String },
-    'home': { type: String }
+    'home': { type: String },
+    'avatar': { type: String } 
 });
 
 mongoose.model('Comment', CommentSchema);

@@ -1,4 +1,6 @@
 var models = require('../../models')
+  , crypto = require('crypto')
+  , util = require('../../util')
   , Comment = models.Comment
   , articleCtrl = require('../article');
 
@@ -35,13 +37,15 @@ exports.save = function(req, res, next) {
     name = req.body.name,
     email = req.body.email,
     home = req.body.home,
+    avatar = util.gravatar(email),
     articleId = req.body.articleId;
     addComment({
         'articleId': articleId,	
         'content': content,
         'name': name,
         'email': email,
-        'home': home
+        'home': home,
+        'avatar': avatar 
     }, function(err, comment) {
         if (err) {
             return next(err);	
