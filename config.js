@@ -3,6 +3,8 @@ exports.config = {
     'brand': 'MaoMao\' Blog',	
     'description': '',
 
+    'favicon': './public/favicon.ico',
+
     'author': {
         'name': '毛毛',
         'head': 'http://s.maoshuyu.com/res/head.jpg',
@@ -13,6 +15,11 @@ exports.config = {
     //静态文件存储的URL
     'staticUrl': 'http://s.maoshuyu.com',
     'db': 'mongodb://127.0.0.1/mmblog',
+
+    'log': {
+        'access': './log/access.log', 
+        'error': './log/error.log'
+    },
 
     'rss': {
         'title': 'MaoMao\' Blog', 

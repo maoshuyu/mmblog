@@ -7,14 +7,15 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , fs = require('fs')
+  , config = require('./config').config
   , routes = require('./routes')
   , article = require('./routes/article')
   , comment = require('./routes/comment')
   , rss = require('./routes/rss');
-  
+
 var app = express()
-  , accessLogfile = fs.createWriteStream('access.log', {'flags': 'a'})
-  , errorLogfile = fs.createWriteStream('error.log', {'flags': 'a'});
+  , accessLogfile = fs.createWriteStream(config.log.access, {'flags': 'a'})
+  , errorLogfile = fs.createWriteStream(config.log.error, {'flags': 'a'});
 
 app.set('port', process.env.PORT || 3000);
 
@@ -24,7 +25,7 @@ app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
 // 设定favicon.ico的过期时间为356d
-app.use(express.favicon('./public/favicon.ico', {maxAge: 31536000000}));
+app.use(express.favicon(config.favicon, {maxAge: 31536000000}));
 
 //访问日志
 app.use(express.logger('dev'));
