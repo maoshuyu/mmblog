@@ -210,8 +210,6 @@ body {
     text-decoration:none;
     color:#222;
 }
-.side.contact .contact-item a:hover {
-}
 .side.recent .recent-list {
     border:1px solid #222;
     overflow:hidden;

@@ -525,14 +525,12 @@
         },
 
         loading: function() {
-            var loadingEl = $('<i class="icon-spinner icon-spin icon-4x icon-loading"></i>'); 
+            var loadingEl = $('<i class="icon-spinner icon-spin icon-4x icon-loading"></i>').hide(); 
             $('#main').append(loadingEl);
-            loadingEl.hide();
-            //2秒之后再添加loading。
+            //0.5秒之后再添加loading。
             setTimeout(function() {
-                //搞个小动画,css3也可以。
-                loadingEl.fadeIn();
-            }, 2000);
+                loadingEl.show();
+            }, 500);
         },
 
         destroy: function() {
