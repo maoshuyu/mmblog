@@ -21,6 +21,25 @@ function createArticle(newArticle, cb) {
     });
 }
 
+function editArticle(id, newArticle, cb) {
+    getArticleById(id, function(err, article) {
+        if (err) {
+            return cb(err); 
+        } 
+        article.title = newArticle.title;
+        article.content = newArticle.content;
+        article.preview = newArticle.preview;
+        article.updateTime = new Date();
+        
+        article.save(function(err, article) {
+            if (err) {
+                return cb(err); 
+            }     
+            return cb(null, article);
+        });
+    });
+}
+
 function getArticleByQuery(query, fields ,opt, cb) {
     Article.find(query, fields, opt, function(err, articles) {
         if (err) {
@@ -127,5 +146,6 @@ exports.one = function(req, res, next) {
 }
 
 exports.createArticle = createArticle;
+exports.editArticle = editArticle;
 exports.getArticleByQuery = getArticleByQuery;
 exports.getArticleById = getArticleById;
