@@ -4,6 +4,23 @@ var models = require('../../models')
   , markdown = require('markdown').markdown
   , EventProxy = require('eventproxy');
 
+function createArticle(newArticle, cb) {
+    var article = new Article();
+    article.title = newArticle.title;
+    article.content = newArticle.content;
+    article.preview = newArticle.preview;
+    article.createTime = newArticle.createTime || new Date();
+    article.updateTime = newArticle.updateTime || new Date();
+    article.commentCount = newArticle.commentCount || 0;
+    article.save(function(err, article) {
+        if (err) {
+            return cb(err); 
+        }     
+
+        return cb(null, article);
+    });
+}
+
 function getArticleByQuery(query, fields ,opt, cb) {
     Article.find(query, fields, opt, function(err, articles) {
         if (err) {
@@ -94,7 +111,7 @@ exports.one = function(req, res, next) {
             return next(err);   
         }      
         ep.emit('article', {
-           _id: article._id, 
+            _id: article._id, 
             title: article.title, 
             //使用markdown转化为html.
             content: markdown.toHTML(article.content), 
@@ -109,5 +126,6 @@ exports.one = function(req, res, next) {
     });
 }
 
+exports.createArticle = createArticle;
 exports.getArticleByQuery = getArticleByQuery;
 exports.getArticleById = getArticleById;

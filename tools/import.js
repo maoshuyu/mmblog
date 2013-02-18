@@ -4,10 +4,9 @@
  */
 
 var fs = require('fs')
-  , models = require('../models')
-  , Article = models.Article
+  , article = require('../routes/article') 
   , url = process.argv[2] 
-  , infoUrl, contentUrl, previewUrl, title, content, preview, info, article;
+  , infoUrl, contentUrl, previewUrl, title, content, preview, info;
 
 if (!url) {
     console.log('请输入BLOG所在的路径');
@@ -33,14 +32,15 @@ if (!content) {
 }
 if (!preview) {
     preview = content;
-    console.log('缺少BLOG预览');   
+    console.log('缺少BLOG预览，导入失败！！');   
 }
 console.log('正在入库...');
-article = new Article();
-article.title = title;
-article.content = content;
-article.preview = preview;
-article.save(function(err) {
+
+article.createArticle({
+    'title': title, 
+    'content': content, 
+    'preview': preview
+}, function(err, article) {
     if (err) {
         console.log(err);
         console.log('导入失败。');

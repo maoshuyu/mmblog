@@ -7,7 +7,7 @@ var ArticleSchema = new Schema({
     'preview': { type: String },
     'createTime': { type: Date, default: Date.now },
     'updateTime': { type: Date, default: Date.now },
-    'commentCount': {type: Number, default: 0}
+    'commentCount': { type: Number, default: 0 }
 });
 
 mongoose.model('Article', ArticleSchema);
