@@ -14,8 +14,8 @@ var express = require('express')
   , rss = require('./routes/rss');
 
 var app = express()
-  , accessLogfile = fs.createWriteStream(config.log.access, {'flags': 'a'})
-  , errorLogfile = fs.createWriteStream(config.log.error, {'flags': 'a'});
+  , accessLogfile 
+  , errorLogfile;
 
 app.set('port', process.env.PORT || 3000);
 
@@ -24,25 +24,15 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.engine('html', ejs.renderFile);
 
-// 设定favicon.ico的过期时间为356d
-app.use(express.favicon(config.favicon, {maxAge: 31536000000}));
-
-//访问日志
-app.use(express.logger('dev'));
-app.use(express.logger({'stream': accessLogfile}));
-
-//启用gzip
-app.use(express.compress());
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(app.router);
-
-app.use(express.static(path.join(__dirname, 'public')));
-
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
+    app.use(express.logger('dev'));
 }
 if ('production' == app.get('env')) {
+    accessLogfile = fs.createWriteStream(config.log.access, {'flags': 'a'});
+    errorLogfile = fs.createWriteStream(config.log.error, {'flags': 'a'});
+    //访问日志
+    app.use(express.logger({'stream': accessLogfile}));
     //错误日志
     app.use(function(err, req, res, next) {
         var meta = '[' + new Date() + '] ' + req.url + '\n';        
@@ -50,6 +40,18 @@ if ('production' == app.get('env')) {
         next();
     });
 }
+
+// 设定favicon.ico的过期时间为356d
+app.use(express.favicon(config.favicon, {maxAge: 31536000000}));
+
+//启用gzip
+app.use(express.compress());
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(app.router);
+
+//静态文件路径
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.index);
 app.get('/article/recent', article.recent);
