@@ -88,7 +88,7 @@
                            <ul class="article-comment-list">\
                            </ul>\
                            <div class="article-comment-editor">\
-                             <form class="form-inline article-comment-form">\
+                             <form class="form-inline article-comment-form" onsubmit="return false">\
                                <div class="alert alert-error article-comment-error">\
                                  <button type="button" class="close" data-dismiss="alert">×</button>\
                                  <p class="alert-text"></p>\
