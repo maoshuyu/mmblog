@@ -2,7 +2,8 @@ var models = require('../../models')
   , crypto = require('crypto')
   , util = require('../../util')
   , Comment = models.Comment
-  , articleCtrl = require('../article');
+  , articleCtrl = require('../article')
+  , _ = require('underscore');
 
 
 function addComment(newComment, cb) {
@@ -59,6 +60,18 @@ exports.list = function(req, res, next) {
         if (err) {
             return next(err);	
         }
+        _.each(list, function(comment, i, list) {
+            list[i] = {
+                'articleId': comment.articleId, 
+                'content': comment.content,
+                'name': comment.name,
+                'email': comment.email,
+                'home': comment.home,
+                'avatar': comment.avatar,
+                '_id': comment._id,
+                'createTime': util.convertTime(comment.createTime)
+            };
+        });
         res.json(list);
     });
 }

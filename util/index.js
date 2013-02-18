@@ -8,4 +8,13 @@ exports.gravatar = function(avatar) {
     return util.format(baseGravatar, crypto.createHash('md5').update(avatar).digest('hex'), encodeURIComponent(defaultAvatar));
 }
 
-
+exports.convertTime = function(d) {
+    return {
+        'year': d.getFullYear(),    
+        'month': d.getMonth(),
+        'day': d.getDate(),
+        'hours': d.getHours(),
+        'minutes': d.getMinutes(),
+        'seconds': d.getSeconds()
+    }
+}

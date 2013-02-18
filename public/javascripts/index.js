@@ -18,7 +18,7 @@
 
     var ArticleListTemplate = '<% _.each(obj, function(item) { %>\
                                <div class="article">\
-                                 <% var d = _.templateHelper.formatDate(item.createTime) %>\
+                                 <% var d = _.templateHelper.formatDate(item.createTime); %>\
                                  <div class="article-date pull-left">\
                                    <span class="article-month"><%= d.month %>月</span>\
                                    <span class="article-day"><%= d.day %><br><%= d.year %></span>\
@@ -121,22 +121,20 @@
                                </li>';
 
     _.templateHelper = {
+
+        months: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
+
         formatDate: function(date) {
-            var months = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
-            d = new Date(date),
-            year = d.getFullYear(),
-            month = d.getMonth(),
-            day = d.getDate();
             return {
-                'year': year, 
-                'month': months[month],  
-                'day': day 
+                'year': date.year, 
+                'month': this.months[date.month],  
+                'day': date.day 
             }; 
         },  
 
         diffDate: function(date) {
             var now = new Date(),   
-            date = new Date(date), 
+            date = new Date(date.year, date.month, date.day, date.hours, date.minutes, date.seconds), 
             diff = null,
             base = Math.abs(date - now) / 1000;
             if ((diff = base / 60 / 60 /24) && diff >= 1) {
@@ -178,12 +176,11 @@
      */
     var Article = Backbone.Model.extend({
 
-        urlRoot: '/article/', 
+        urlRoot: '/article/' 
 
     });
 
     var Recent = Backbone.Model.extend({
-
     });
 
     var Comment = Backbone.Model.extend({
@@ -222,7 +219,39 @@
      * view
      */
 
-    var ArticleListView = Backbone.View.extend({
+    var BaseView = Backbone.View.extend({
+
+        elements: {
+        },
+
+        refreshElement: function() {
+            for (var key in this.elements) {
+                this[this.elements[key]] = this.$(key); 
+            } 
+        },
+            
+        destroy: function() {
+            this.remove();          
+            if (!this.model) {
+                return; 
+            }
+            //collection
+            if (this.model.models) {
+                var model;
+                while ((model = this.model.models.pop())) {
+                    model.destroy(); 
+                }
+                this.model = null;
+            //model
+            } else {
+                this.model.destroy(); 
+                this.model = null;
+            }
+        }
+    });
+
+
+    var ArticleListView = BaseView.extend({
 
         template: _.template(ArticleListTemplate),
 
@@ -248,18 +277,10 @@
             this.$el.empty();
             this.stopListening();
             return this;
-        },
-
-        destroy: function() {
-            this.remove();          
-            this.model.forEach(function(article) {
-                article.destroy();
-            });
-        }
-
+        }    
     });
 
-    var RecentListView = Backbone.View.extend({
+    var RecentListView = BaseView.extend({
 
         template: _.template(RecentListTemplate),
 
@@ -281,18 +302,11 @@
             this.$el.empty();
             this.stopListening();
             return this;
-        },
-
-        destroy: function() {
-            this.remove();  
-            this.model.forEach(function(recent) {
-                recent.destroy();
-            });
         }
 
     });
 
-    var ArticleView = Backbone.View.extend({
+    var ArticleView = BaseView.extend({
 
         template: _.template(ArticleTemplate),
 
@@ -316,12 +330,6 @@
             prettify();
         },
 
-        refreshElement: function() {
-            for (var key in this.elements) {
-                this[this.elements[key]] = this.$(key); 
-            } 
-        },
-
         //初始化评论功能。
         initComment: function() {
             this.commentView = new CommentView({
@@ -337,12 +345,12 @@
 
         destroy: function() {
             this.remove();
-            this.commentView.destroy();
             this.model.destroy();
+            this.commentView.destroy();
         }
     });
 
-    var CommentView = Backbone.View.extend({
+    var CommentView = BaseView.extend({
 
         template: _.template(CommentTemplate),         
 
@@ -390,19 +398,13 @@
         },
 
         appendComments: function() {
-            _.each(this.model.models, (function(model, index) {
+            _.each(this.model.models, _.bind(function(model, index) {
                 this.appendOne(model);
-            }).bind(this));
+            }, this));
         },
 
         appendOne: function(model) {
             this.commentListEl.append(this.itemTemplate(model.toJSON()));
-        },
-
-        refreshElement: function() {
-            for (var key in this.elements) {
-                this[this.elements[key]] = this.$(key); 
-            } 
         },
 
         extendTextarea: function() {
@@ -489,14 +491,7 @@
             this.changeReplyBtnStatus();
             this.hideError();
             this.commentEditorEl.removeClass('extend');
-        },
-
-        destroy: function() {
-            this.remove();
-            this.model.forEach(function(comment) {
-                comment.destroy();
-            });
-        }
+        }    
     });
 
     /**
@@ -535,7 +530,7 @@
 
         destroy: function() {
             var view;
-            while ((view = this.views.pop()) != null) {
+            while ((view = this.views.pop())) {
                 view.destroy(); 
             }
             this.loading();

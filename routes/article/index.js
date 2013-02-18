@@ -1,5 +1,6 @@
 var models = require('../../models')
   , Article = models.Article
+  , util = require('../../util')
   , _ = require('underscore')
   , markdown = require('markdown').markdown
   , EventProxy = require('eventproxy');
@@ -95,7 +96,7 @@ exports.list = function(req, res, next) {
                 //使用markdown转化为html.
                 content: markdown.toHTML(article.preview), 
                 commentCount: article.commentCount,
-                createTime: article.createTime
+                createTime: util.convertTime(article.createTime)
             }; 
         });
         res.json(200, articles);
@@ -134,7 +135,7 @@ exports.one = function(req, res, next) {
             title: article.title, 
             //使用markdown转化为html.
             content: markdown.toHTML(article.content), 
-            createTime: article.createTime 
+            createTime: util.convertTime(article.createTime) 
         });
     }); 
     getNeighborArticle(id, function(err, neighbor) {
