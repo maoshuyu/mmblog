@@ -16,41 +16,45 @@
                               <% }); %>\
                               </ul>';
 
-    var ArticleListTemplate = '<% _.each(obj, function(item) { %>\
-                               <div class="article">\
-                                 <% var d = _.templateHelper.formatDate(item.createTime); %>\
-                                 <div class="article-date pull-left">\
-                                   <span class="article-month"><%= d.month %>月</span>\
-                                   <span class="article-day"><%= d.day %><br><%= d.year %></span>\
-                                 </div>\
-                                 <h3 class="article-title">\
-                                   <a href="#article/<%= item._id %>" title="<%= item.title %>">\
-                                   <%= item.title %>\
-                                   </a>\
-                                 </h3>\
-                                 <div class="article-content">\
-                                 <%= item.content %>\
-                                 </div>\
-                                 <div class="article-footer clearfix">\
-                                    <a class="pull-left article-footer-commentCount" href="#article/<%= item._id %>" title="<%= item.commentCount %>条评论">\
-                                      <i class="icon-comment"></i>\
-                                      <span><%= item.commentCount %></span>\
-                                    </a>\
-                                    <a href="#article/<%= item._id %>" class="pull-right article-more" title="点击阅读更多">点击阅读更多</a>\
-                                 </div>\
-                               </div>\
-                               <% }); %>';
+    var ArticleListTemplate = '<section class="article-list">\
+                                 <% _.each(obj, function(item) { %>\
+                                 <article class="article">\
+                                   <% var d = _.templateHelper.formatDate(item.createTime); %>\
+                                   <header class="article-header clearfix">\
+                                     <time datatime="<%= item.createTime.year %>-<%= item.createTime.month %>-<%= item.createTime.day %>" class="article-date pull-left">\
+                                       <span class="article-month"><%= d.month %>月</span>\
+                                       <span class="article-day"><%= d.day %><br><%= d.year %></span>\
+                                     </time>\
+                                     <h3 class="article-title">\
+                                       <a href="#article/<%= item._id %>" title="<%= item.title %>">\
+                                       <%= item.title %>\
+                                       </a>\
+                                     </h3>\
+                                   </header>\
+                                   <div class="article-content">\
+                                   <%= item.content %>\
+                                   </div>\
+                                   <aside class="article-footer clearfix">\
+                                      <a class="pull-left article-footer-commentCount" href="#article/<%= item._id %>" title="<%= item.commentCount %>条评论">\
+                                        <i class="icon-comment"></i>\
+                                        <span><%= item.commentCount %></span>\
+                                      </a>\
+                                      <a href="#article/<%= item._id %>" class="pull-right article-more" title="点击阅读更多">点击阅读更多</a>\
+                                   </aside>\
+                                 </article>\
+                                 <% }); %>\
+                               </section>';
 
-    var ArticleTemplate = '<div class="article">\
+    var ArticleTemplate = '<article class="article">\
                              <h3>\
                                <%= title %>\
                              </h3>\
                              <div class="article-content">\
                                <%= content %>\
                              </div>\
-                             <div class="article-comment" data-article="<%= _id %>">\
-                             </div>\
-                             <div class="article-footer">\
+                             <section class="article-comment" data-article="<%= _id %>">\
+                             </section>\
+                             <aside class="article-footer">\
                                <ul class="pager">\
                                  <% if (previous) { %>\
                                  <li class="previous">\
@@ -81,12 +85,12 @@
                                  <% } %>\
                                  </li>\
                                </ul>\
-                             </div>\
-                           </div>';
+                             </aside>\
+                           </article>';
 
     var CommentTemplate = '<h4><span class="article-comment-count"><%= commentsLength %></span> 条评论</h4>\
-                           <ul class="article-comment-list">\
-                           </ul>\
+                           <div class="article-comment-list">\
+                           </div>\
                            <div class="article-comment-editor">\
                              <form class="form-inline article-comment-form" onsubmit="return false">\
                                <div class="alert alert-error article-comment-error">\
@@ -104,8 +108,8 @@
                                <button class="article-comment-reply btn disabled pull-right" disabled="disabled">回复</button>\
                              </form>\
                            </div>';
-    var CommentItemTemplate = '<li class="article-comment-item">\
-                                 <div class="article-comment-avatar"><img width="40" height="40" src="<%= avatar %>"/></div>\
+    var CommentItemTemplate = '<article class="article-comment-item">\
+                                 <div class="comment-avatar"><img width="40" height="40" src="<%= avatar %>"/></div>\
                                  <div class="comment-item-head">\
                                     <% if (home) { %>\
                                     <a class="comment-item-name" title="<%= name %>" href="<%= home %>" target="_black"><%= name %></a>\
@@ -113,12 +117,12 @@
                                     <span class="comment-item-name" title="<%= name %>"><%= name %></span>\
                                     <% } %>\
                                     <span class="comment-item-bullet" aria-hidden="true">•</span>\
-                                    <span class="comment-item-time"><%= _.templateHelper.diffDate(createTime) %></span>\
+                                    <time datatime="<%= createTime.year %>-<%= createTime.month %>-<%= createTime.day %>" class="comment-item-time"><%= _.templateHelper.diffDate(createTime) %></time>\
                                  </div>\
                                  <div class="comment-item-body">\
                                     <p class="comment-item-content"><%= content %></p>\
                                  </div>\
-                               </li>';
+                               </article>';
 
     _.templateHelper = {
 
