@@ -10,8 +10,8 @@ function createArticle(newArticle, cb) {
     article.content = newArticle.content;
     article.preview = newArticle.preview;
     article.createTime = newArticle.createTime || new Date();
-    article.updateTime = newArticle.updateTime || new Date();
-    article.commentCount = newArticle.commentCount || 0;
+    //文章创建时,createTime === updateTime
+    article.updateTime = newArticle.createTime || new Date();
     article.save(function(err, article) {
         if (err) {
             return cb(err); 
