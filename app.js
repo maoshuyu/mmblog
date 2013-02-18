@@ -51,7 +51,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 
 //静态文件路径
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {maxAge: 31536000000}));
 
 app.get('/', routes.index);
 app.get('/article/recent', article.recent);
