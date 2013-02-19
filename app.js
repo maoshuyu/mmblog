@@ -57,6 +57,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public'), {maxAge: 31536000000}));
 
 app.get('/', routes.index);
+app.get('/nonsupport', routes.nonsupport);
 app.get('/article/recent', article.recent);
 app.get('/article/', article.list);
 app.get('/article/:id', article.one);
