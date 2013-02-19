@@ -1,16 +1,31 @@
+
 <title><%= title %></title>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 
+<% if (mode == "production") { %>
+<!-- 产品模式 -->
 <!-- bootstrap 2.2.2 -->
-<!-- <link href="<%= staticUrl %>/stylesheets/bootstrap.css" rel="stylesheet"> -->
 <link href="<%= staticUrl %>/stylesheets/bootstrap-v2.2.2-min.css" rel="stylesheet">
-
 <!-- font-awesome 3.0.1 -->
-<!-- <link href="<%= staticUrl %>/stylesheets/font-awesome.css" rel="stylesheet"> -->
 <link href="<%= staticUrl %>/stylesheets/font-awesome-v3.0.1-min.css" rel="stylesheet">
+<% } %>
+
+<% if (mode == "development") { %>
+<!-- 开发模式 -->
+<!-- bootstrap 2.2.2 -->
+<link href="<%= staticUrl %>/stylesheets/bootstrap.css" rel="stylesheet"> 
+<!-- font-awesome 3.0.1 -->
+<link href="<%= staticUrl %>/stylesheets/font-awesome.css" rel="stylesheet"> 
+<% } %>
 
 <!-- base -->
 <link href="<%= staticUrl %>/stylesheets/index.css" rel="stylesheet">
+
+<!-- IE8 支持html5标签 -->
+<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+
+

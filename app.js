@@ -17,6 +17,9 @@ var app = express()
   , accessLogfile 
   , errorLogfile;
 
+//全局变量，标记当前的env
+global.mode = app.get('env'); 
+
 app.set('port', process.env.PORT || 3000);
 
 //设置模板引擎为ejs
@@ -54,6 +57,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public'), {maxAge: 31536000000}));
 
 app.get('/', routes.index);
+app.get('/nonsupport', routes.nonsupport);
 app.get('/article/recent', article.recent);
 app.get('/article/', article.list);
 app.get('/article/:id', article.one);

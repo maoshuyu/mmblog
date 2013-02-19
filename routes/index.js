@@ -8,7 +8,18 @@ exports.index = function(req, res, next) {
         'title': config.name, 
         'brand': config.brand,
         'staticUrl': config.staticUrl,
-        'author': config.author
+        'author': config.author,
+        'domain': config.domain,
+        'mode': global.mode
+    });
+};
+
+exports.nonsupport = function(req, res, next) {
+    res.render('nonsupport', { 
+        'title': config.name, 
+        'domain': config.domain,
+        'staticUrl': config.staticUrl,
+        'mode': global.mode
     });
 };
 
