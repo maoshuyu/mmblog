@@ -4,10 +4,10 @@
 seajs.config({
     // 配置别名
     alias: {
-        'jquery': 'common/jquery/jquery-1.9.1.min.js',
-        'backbone': 'common/backbone/backbone-v0.9.10-min.js',
-        'underscore': 'common/underscore/underscore-v1.4.3-min.js',
-        'prettify': 'common/prettify/prettify-min.js'
+        'jquery': 'common/jquery/jquery.js',
+        'backbone': 'common/backbone/backbone.js',
+        'underscore': 'common/underscore/underscore.js',
+        'prettify': 'common/prettify/prettify.js'
     },
 
     plugins: ['shim'],

@@ -8,7 +8,8 @@ exports.index = function(req, res, next) {
         'title': config.name, 
         'brand': config.brand,
         'staticUrl': config.staticUrl,
-        'author': config.author
+        'author': config.author,
+        'mode': global.mode
     });
 };
 
