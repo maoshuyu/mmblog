@@ -10,16 +10,14 @@ seajs.config({
         'prettify': 'common/prettify/prettify.js'
     },
 
-    //backbone依赖jquery和underscore,所以先加载
-    preload: ['jquery', 'underscore'],
-
     plugins: ['shim'],
 
     base: 'http://s.maoshuyu.com/javascripts/',
 
     shim: {
         'jquery': {
-            exports: 'jQuery'
+            exports: 'jQuery',
+            deps: ['underscore', 'jquery']
         },
         'underscore': {
             exports: '_' 
