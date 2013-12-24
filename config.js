@@ -11,7 +11,7 @@ exports.config = {
     'author': {
         'name': '毛毛',
         'head': 'http://s.maoshuyu.com/res/head.jpg',
-        'description': '2011年毕业于河北工程大学地理信息系统专业，目前就职于人人网FED。'
+        'description': '2011年毕业于河北工程大学地理信息系统专业，目前就职于Weico。'
     },
 
     //域名
@@ -19,7 +19,7 @@ exports.config = {
     //静态文件存储的URL
     'staticUrl': 'http://s.maoshuyu.com',
     //数据库
-    'db': 'mongodb://127.0.0.1/mmblog',
+    'db': 'mongodb://106.187.43.200/mmblog',
 
     //log
     'log': {
